@@ -1,0 +1,208 @@
+/* --- Variables de Couleurs (pour la facilité de changement) --- */
+:root {
+    --color-primary: #1a1a1a; /* Noir profond */
+    --color-secondary: #d4af37; /* Or texturé */
+    --color-tertiary: #f8f8f8; /* Blanc cassé */
+    --color-text-light: #e0e0e0;
+    --color-text-dark: #333;
+    --font-primary: 'Playfair Display', serif; /* Élégant, pour les titres */
+    --font-secondary: sans-serif; /* Police système par défaut */
+}
+
+/* --- Réinitialisation et Styles Globaux --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-secondary);
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    line-height: 1.6;
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+}
+
+/* --- Header --- */
+header {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: rgba(0, 0, 0, 0.3); /* Fond légèrement transparent */
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-family: var(--font-primary);
+    font-size: 4em;
+    margin-bottom: 10px;
+    color: var(--color-secondary);
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+header .subtitle {
+    font-size: 1.8em;
+    font-weight: 300;
+    color: var(--color-text-light);
+}
+
+/* --- Galerie --- */
+#gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Espace entre les items */
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto 60px auto; /* Centrer la galerie */
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden; /* Cache ce qui dépasse */
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background-color: var(--color-primary); /* Pour le cas où l'image charge lentement */
+    border-radius: 8px; /* Coins légèrement arrondis */
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px) scale(1.02); /* Effet subtil de surélévation et zoom */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Ombre plus prononcée */
+}
+
+.gallery-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Assure que l'image couvre bien la zone sans déformation */
+    transition: transform 0.5s ease-in-out; /* Animation de zoom sur l'image elle-même */
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1); /* Zoom subtil sur l'image au survol */
+}
+
+.gallery-item .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%); /* Gradient pour le texte */
+    opacity: 0; /* Caché par défaut */
+    transition: opacity 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Aligner le texte en bas */
+    padding: 20px;
+    text-align: center;
+    color: var(--color-text-light);
+}
+
+.gallery-item:hover .overlay {
+    opacity: 1; /* Apparaît au survol */
+}
+
+.gallery-item .overlay h3 {
+    font-family: var(--font-primary);
+    font-size: 1.6em;
+    margin-bottom: 5px;
+    color: var(--color-secondary); /* Couleur dorée pour les titres */
+}
+
+.gallery-item .overlay p {
+    font-size: 0.9em;
+    font-weight: 300;
+}
+
+/* --- Contrôle de musique --- */
+.music-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+#toggle-music {
+    background: rgba(26, 26, 26, 0.8); /* Utilisation de --color-primary avec transparence */
+    color: var(--color-text-light);
+    border: 1px solid var(--color-secondary); /* Bordure dorée */
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--font-secondary);
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    backdrop-filter: blur(5px); /* Effet de flou d'arrière-plan */
+}
+
+#toggle-music:hover {
+    background: rgba(212, 175, 55, 0.2); /* Léger effet doré au survol */
+}
+
+#toggle-music.playing {
+    background: rgba(212, 175, 55, 0.3); /* Fond doré subtil quand la musique joue */
+    color: var(--color-secondary); /* Texte doré */
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+    background-color: rgba(0, 0, 0, 0.4);
+    font-size: 0.9em;
+    color: var(--color-text-light);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 3em;
+    }
+    header .subtitle {
+        font-size: 1.4em;
+    }
+    #gallery {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        padding: 0 15px;
+    }
+    .gallery-item .overlay h3 {
+        font-size: 1.4em;
+    }
+    /* Responsive pour le contrôle de musique */
+    .music-controls {
+        top: 15px;
+        right: 15px;
+    }
+    #toggle-music {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2.5em;
+    }
+    header .subtitle {
+        font-size: 1.2em;
+    }
+    .gallery-item .overlay h3 {
+        font-size: 1.2em;
+    }
+    .gallery-item .overlay p {
+        font-size: 0.8em;
+    }
+    /* Responsive pour le contrôle de musique */
+    .music-controls {
+        top: 10px;
+        right: 10px;
+    }
+    #toggle-music {
+        padding: 6px 10px;
+        font-size: 0.7rem;
+    }
+}
